@@ -1,3 +1,6 @@
+import uuid
+
+
 class Article:
 
     def __init__(self, title, description=None, page=None, binder=None, tags=None):
@@ -6,6 +9,7 @@ class Article:
         self._page = page
         self._binder = binder
         self._tags = tags
+        self._uuid = uuid.uuid4().hex
 
     @property
     def title(self):
@@ -58,3 +62,7 @@ class Article:
     @tags.setter
     def tags(self, value):
         self._tags = value
+
+    @property
+    def uuid(self):
+        return self._uuid
