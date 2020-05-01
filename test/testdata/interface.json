@@ -1,0 +1,54 @@
+{
+  "add_articles": [
+    {
+      "title": "Artykul pierwszy",
+      "description": "Opis pierwszego artykułu",
+      "page": "1",
+      "binder": "MORZE",
+      "tags": "tag1,tag2,tag3"
+    },
+    {
+      "title": "Artykul drugi",
+      "description": "Opis drugiego artykułu",
+      "page": "2",
+      "binder": "MORZE",
+      "tags": "tag4,tag5,tag6"
+    },
+    {
+      "title": "Artykul trzeci",
+      "description": "",
+      "page": "3",
+      "binder": "ŚRÓDLĄDZIE",
+      "tags": "tag7,tag8,tag9"
+    },
+    {
+      "title": "Artykul czwarty",
+      "description": "Opis czwartego artykułu",
+      "page": "",
+      "binder": "MORZE",
+      "tags": "tag3,tag6,tag9"
+    },
+    {
+      "title": "Artykul piąty",
+      "description": "Opis pierwszego artykułu",
+      "page": "5",
+      "binder": "",
+      "tags": "tag2,tag4,tag5"
+    },
+    {
+      "title": "Artykul szósty",
+      "description": "Opis pierwszego artykułu",
+      "page": "6",
+      "binder": "ŚRÓDLĄDZIE",
+      "tags": ""
+    }
+  ],
+  "sorting_test": ["Zac", "Abc", "aac", "d1e", "d2e"],
+  "editing_test": {
+    "title": "tytuł",
+    "description": "opis",
+    "page": "strona",
+    "binder": "segregator",
+    "tags": "tagi"
+  }
+}

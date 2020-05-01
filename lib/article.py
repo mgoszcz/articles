@@ -12,57 +12,57 @@ class Article:
         self._uuid = uuid.uuid4().hex
 
     @property
-    def title(self):
+    def title(self) -> str:
         return self._title
 
     @title.setter
-    def title(self, value):
+    def title(self, value: str):
         self._title = value
 
     @property
-    def description(self):
+    def description(self) -> str:
         if not self._description:
             return ''
         else:
             return self._description
 
     @description.setter
-    def description(self, value):
+    def description(self, value: str):
         self._description = value
 
     @property
-    def page(self):
+    def page(self) -> str:
         if not self._page:
             return ''
         else:
             return self._page
 
     @page.setter
-    def page(self, value):
+    def page(self, value: str):
         self._page = value
 
     @property
-    def binder(self):
+    def binder(self) -> str:
         if not self._binder:
             return ''
         else:
             return self._binder
 
     @binder.setter
-    def binder(self, value):
+    def binder(self, value: str):
         self._binder = value
 
     @property
-    def tags(self):
+    def tags(self) -> str:
         if not self._tags:
             return ''
         else:
             return self._tags
 
     @tags.setter
-    def tags(self, value):
+    def tags(self, value: str):
         self._tags = value
 
     @property
-    def uuid(self):
+    def uuid(self) -> str:
         return self._uuid
