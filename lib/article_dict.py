@@ -3,6 +3,11 @@ import collections
 
 class ArticleDict(dict):
 
+    def __setitem__(self, key, value):
+        if key in self.keys():
+            raise AttributeError(f'Key "{key}" already exists')
+        super().__setitem__(key, value)
+
     def sort_by_title(self) -> collections.OrderedDict:
         new_dict = collections.OrderedDict()
         new_list = list(self.values())

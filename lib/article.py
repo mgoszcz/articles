@@ -9,7 +9,7 @@ class Article:
         self._page = page
         self._binder = binder
         self._tags = tags
-        self._uuid = uuid.uuid4().hex
+        self._uuid = None
 
     @property
     def title(self) -> str:
@@ -65,4 +65,9 @@ class Article:
 
     @property
     def uuid(self) -> str:
+        if not self._uuid:
+            self.generate_uuid()
         return self._uuid
+
+    def generate_uuid(self):
+        self._uuid = uuid.uuid4().hex
