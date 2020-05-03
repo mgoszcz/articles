@@ -10,8 +10,9 @@ class CSVImporter:
         self.file_path = file_path
 
     def import_data(self):
-        data = pandas.read_csv(self.file_path, sep=';')
+        data = pandas.read_csv(self.file_path, sep=';', encoding='windows-1250')
         for i in data.index:
             article = Article(title=data['title'][i], description=data['description'][i], page=data['page'][i],
-                              binder=data['page'][i], tags=data['tags'][i])
+                              binder=data['page'][i], tags=data['tags'][i].split(':'))
+
             self.articles_list[article.uuid] = article

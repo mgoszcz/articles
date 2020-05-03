@@ -1,9 +1,17 @@
 import uuid
+from typing import List
+
+from lib.validators import Validators
 
 
 class Article:
 
-    def __init__(self, title, description=None, page=None, binder=None, tags=None):
+    @Validators.attribute_validator('title', str)
+    @Validators.attribute_validator('description', str)
+    @Validators.attribute_validator('page', str)
+    @Validators.attribute_validator('binder', str)
+    @Validators.attribute_validator('tags', list)
+    def __init__(self, title: str, description: str = '', page: str = '', binder: str = '', tags: List[str] = None):
         self._title = title
         self._description = description
         self._page = page
@@ -16,51 +24,46 @@ class Article:
         return self._title
 
     @title.setter
+    @Validators.attribute_validator('value', str)
     def title(self, value: str):
         self._title = value
 
     @property
     def description(self) -> str:
-        if not self._description:
-            return ''
-        else:
-            return self._description
+        return self._description
 
     @description.setter
+    @Validators.attribute_validator('value', str)
     def description(self, value: str):
         self._description = value
 
     @property
     def page(self) -> str:
-        if not self._page:
-            return ''
-        else:
-            return self._page
+        return self._page
 
     @page.setter
+    @Validators.attribute_validator('value', str)
     def page(self, value: str):
         self._page = value
 
     @property
     def binder(self) -> str:
-        if not self._binder:
-            return ''
-        else:
-            return self._binder
+        return self._binder
 
     @binder.setter
+    @Validators.attribute_validator('value', str)
     def binder(self, value: str):
         self._binder = value
 
     @property
-    def tags(self) -> str:
+    def tags(self) -> List[str]:
         if not self._tags:
-            return ''
-        else:
-            return self._tags
+            self._tags = list()
+        return self._tags
 
     @tags.setter
-    def tags(self, value: str):
+    @Validators.attribute_validator('value', list)
+    def tags(self, value: List[str]):
         self._tags = value
 
     @property
