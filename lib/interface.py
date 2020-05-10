@@ -4,6 +4,7 @@ from typing import List
 from lib.article import Article
 from lib.article_dict import ArticleDict
 from lib.csv_importer import CSVImporter
+from lib.exceptions import DuplicatedArticle
 from lib.save_load import SaveLoad
 
 
@@ -18,7 +19,7 @@ class ArticleInterface:
         article = Article(title=title, description=description, page=page, binder=binder, tags=tags)
         try:
             self._article_list[article.uuid] = article
-        except AttributeError:
+        except DuplicatedArticle:
             article.generate_uuid()
             self._article_list[article.uuid] = article
         self.save_data()

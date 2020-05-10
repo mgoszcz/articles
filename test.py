@@ -14,5 +14,8 @@ def print_articles(articles=INTERFACE.articles_list_sorted):
         # print(f'\t{article.uuid}')
         print('===============================================================')
 
+search = SearchEngine(INTERFACE.articles_list, 'Chorwacja')
+search.search()
+
 print_articles()
 pass

@@ -1,11 +1,13 @@
 import collections
 
+from lib.exceptions import DuplicatedArticle
+
 
 class ArticleDict(dict):
 
     def __setitem__(self, key, value):
         if key in self.keys():
-            raise AttributeError(f'Key "{key}" already exists')
+            raise DuplicatedArticle(f'Key "{key}" already exists')
         super().__setitem__(key, value)
 
     def sort_by_title(self) -> collections.OrderedDict:
