@@ -25,7 +25,11 @@ class ArticleInterface:
         return article.uuid
 
     @property
-    def articles_list(self) -> OrderedDict:
+    def articles_list(self) -> ArticleDict:
+        return self._article_list
+
+    @property
+    def articles_list_sorted(self) -> OrderedDict:
         return self._article_list.sort_by_title()
 
     def get_article(self, uuid: str) -> Article:
