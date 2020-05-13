@@ -1,6 +1,7 @@
 import uuid
 from typing import List
 
+from lib.save_load import AutoSave
 from lib.validators import Validators
 
 
@@ -18,6 +19,10 @@ class Article:
         self._binder = binder
         self._tags = tags
         self._uuid = None
+
+    def __setattr__(self, key, value):
+        super(Article, self).__setattr__(key, value)
+        AutoSave.trigger_save()
 
     @property
     def title(self) -> str:

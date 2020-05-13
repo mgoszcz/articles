@@ -3,27 +3,29 @@ from typing import List
 
 from lib.article import Article
 from lib.article_dict import ArticleDict
-from lib.csv_importer import CSVImporter
 from lib.exceptions import DuplicatedArticle
-from lib.save_load import SaveLoad
+from lib.save_load import SaveLoad, AutoSave
 
 
-class ArticleInterface:
+class ArticleCollection:
 
     def __init__(self):
         self._article_list = ArticleDict()
         self.load_data()
+        AutoSave(self._article_list).start()
 
-    def add_article(self, title: str, description: str = '', page: str = '', binder: str = '',
-                    tags: List[str] = None) -> str:
+    def add_new_article(self, title: str, description: str = '', page: str = '', binder: str = '',
+                        tags: List[str] = None) -> str:
         article = Article(title=title, description=description, page=page, binder=binder, tags=tags)
         try:
             self._article_list[article.uuid] = article
         except DuplicatedArticle:
             article.generate_uuid()
             self._article_list[article.uuid] = article
-        self.save_data()
         return article.uuid
+
+    def add_existing_article(self, article: Article):
+        self._article_list[article.uuid] = article
 
     @property
     def articles_list(self) -> ArticleDict:
@@ -38,7 +40,6 @@ class ArticleInterface:
 
     def remove_article(self, uuid: str):
         del self._article_list[uuid]
-        self.save_data()
 
     def edit_article(self, uuid: str, title: str = '', description: str = '', page: str = '', binder: str = '',
                      tags: List[str] = None):
@@ -53,17 +54,7 @@ class ArticleInterface:
             article.binder = binder
         if tags:
             article.tags = tags
-        self.save_data()
-
-    def import_csv(self, file_path):
-        csv_importer = CSVImporter(self._article_list, file_path)
-        csv_importer.import_data()
-        self.save_data()
 
     def load_data(self):
         save_load = SaveLoad(self._article_list)
         save_load.load_data()
-
-    def save_data(self):
-        save_load = SaveLoad(self._article_list)
-        save_load.save_data()

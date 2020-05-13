@@ -2,7 +2,7 @@ import json
 import os
 import unittest
 
-from lib.interface import ArticleInterface
+from lib.article_collection import ArticleCollection
 
 TEST_DATA_PATH = os.path.join(os.getcwd(), 'testdata', 'interface.json')
 
@@ -15,10 +15,10 @@ class InterfaceTest(unittest.TestCase):
 
     def test_adding_articles(self):
         added_articles = dict()
-        interface = ArticleInterface()
+        interface = ArticleCollection()
         for article in self.test_data['add_articles']:
-            uuid = interface.add_article(article['title'], article['description'], article['page'],
-                                         article['binder'], article['tags'])
+            uuid = interface.add_new_article(article['title'], article['description'], article['page'],
+                                             article['binder'], article['tags'])
             added_articles[uuid] = article
         self.assertEqual(len(interface.articles_list), len(self.test_data['add_articles']),
                          'Verify articles count')
@@ -29,33 +29,33 @@ class InterfaceTest(unittest.TestCase):
                                  f'Verify field {field_key} is corect')
 
     def test_sorting_articles(self):
-        interface = ArticleInterface()
+        interface = ArticleCollection()
         for article in self.test_data['sorting_test']:
-            interface.add_article(article)
+            interface.add_new_article(article)
         added_articles = [article.title for article in interface.articles_list.values()]
         self.assertEqual(sorted(self.test_data['sorting_test']), added_articles,
                          'Verify articles are sorted alphabetically')
 
     def test_removing_article(self):
-        interface = ArticleInterface()
+        interface = ArticleCollection()
         uuids = list()
         for article in self.test_data['add_articles']:
-            uuids.append(interface.add_article(article['title'], article['description'], article['page'],
-                                               article['binder'], article['tags']))
+            uuids.append(interface.add_new_article(article['title'], article['description'], article['page'],
+                                                   article['binder'], article['tags']))
         for uuid in uuids:
             interface.remove_article(uuid)
             self.assertFalse(uuid in interface.articles_list.keys(), 'Verify item was removed from articles list')
         self.assertEqual(len(interface.articles_list), 0, 'Verify articles list is empty')
 
     def test_modifying_article(self):
-        interface = ArticleInterface()
+        interface = ArticleCollection()
         article = self.test_data['editing_test']
         title = article['title']
         description = article['description']
         page = article['page']
         binder = article['binder']
         tags = article['tags']
-        uuid = interface.add_article(title, description, page, binder, tags)
+        uuid = interface.add_new_article(title, description, page, binder, tags)
         interface.edit_article(uuid=uuid, title=f'{title}_edited', description=f'{description}_edited',
                                page=f'{page}_edited', binder=f'{binder}_edited', tags=['tagi_edited'])
         self.assertEqual(interface.get_article(uuid).title, f'{title}_edited', 'Verify title was edited')

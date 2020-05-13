@@ -1,9 +1,10 @@
 from lib.article import Article
 from lib.article_dict import ArticleDict
-from lib.interface import ArticleInterface
+from lib.article_collection import ArticleCollection
 from lib.search_engine import SearchEngine
+from lib.save_load import AutoSave
 
-INTERFACE = ArticleInterface()
+INTERFACE = ArticleCollection()
 
 def print_articles(articles=INTERFACE.articles_list_sorted):
     for article in articles.values():
