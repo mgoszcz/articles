@@ -1,7 +1,7 @@
 import uuid
 from typing import List
 
-from lib.save_load import AutoSave
+from lib.events import SAVE_NEEDED
 from lib.validators import Validators
 
 
@@ -22,7 +22,7 @@ class Article:
 
     def __setattr__(self, key, value):
         super(Article, self).__setattr__(key, value)
-        AutoSave.trigger_save()
+        SAVE_NEEDED.set()
 
     @property
     def title(self) -> str:

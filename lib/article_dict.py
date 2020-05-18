@@ -1,7 +1,7 @@
 import collections
 
+from lib.events import SAVE_NEEDED
 from lib.exceptions import DuplicatedArticle
-from lib.save_load import AutoSave
 
 
 class ArticleDict(dict):
@@ -10,11 +10,11 @@ class ArticleDict(dict):
         if key in self.keys():
             raise DuplicatedArticle(f'Key "{key}" already exists')
         super().__setitem__(key, value)
-        AutoSave.trigger_save()
+        SAVE_NEEDED.set()
 
     def __delitem__(self, key):
         super().__delitem__(key)
-        AutoSave.trigger_save()
+        SAVE_NEEDED.set()
 
     def sort_by_title(self) -> collections.OrderedDict:
         new_dict = collections.OrderedDict()

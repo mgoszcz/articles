@@ -1,13 +1,11 @@
-from __future__ import annotations
-import pickle
 
 import os
-from threading import Thread, Event
+import pickle
 import time
-from typing import TYPE_CHECKING
+from threading import Thread, Event
 
-if TYPE_CHECKING:
-    from lib.article_dict import ArticleDict
+from lib.article_dict import ArticleDict
+from lib.events import SAVE_NEEDED, AUTO_SAVE_PAUSED
 
 
 class AutoSave(Thread):
@@ -24,26 +22,11 @@ class AutoSave(Thread):
 
     def run(self):
         while not self.stop.is_set():
-            if AutoSave.__save_needed.is_set():
+            if SAVE_NEEDED.is_set():
                 print('Save needed, save data')
                 SaveLoad(self._collection).save_data()
-                AutoSave.__save_needed.clear()
+                SAVE_NEEDED.clear()
             time.sleep(5)
-
-    @classmethod
-    def trigger_save(cls):
-        if not cls.__auto_save_paused.is_set():
-            cls.__save_needed.set()
-        else:
-            print('Auto Save is paused now')
-
-    @classmethod
-    def pause_auto_save(cls):
-        cls.__auto_save_paused.set()
-
-    @classmethod
-    def unpause_auto_save(cls):
-        cls.__auto_save_paused.clear()
 
 
 class SaveLoad:
@@ -60,9 +43,9 @@ class SaveLoad:
     def load_data(self):
         if not os.path.exists(self.file_path):
             return
-        AutoSave.pause_auto_save()
+        AUTO_SAVE_PAUSED.set()
         with open(self.file_path, 'rb') as f:
             content = pickle.load(f)
         for key, value in content['articles_list'].items():
             self.articles_list[key] = value
-        AutoSave.unpause_auto_save()
+        AUTO_SAVE_PAUSED.clear()
