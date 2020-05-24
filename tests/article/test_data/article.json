@@ -1,0 +1,37 @@
+{
+  "valid_article": {
+    "title": "test article",
+    "description": "test article description",
+    "page": "56",
+    "binder": "TEST BINDER",
+    "tags": [
+      "test1",
+      "test2",
+      "test3"
+    ]
+  },
+  "invalid_article": {
+    "title": 123,
+    "description": [
+      "a",
+      "b",
+      "c"
+    ],
+    "page": 45,
+    "binder": {
+      "a": "B"
+    },
+    "tags": "tag1,tag2"
+  },
+  "modified_article": {
+    "title": "Modified test title",
+    "description": "Modified test article description",
+    "page": "88",
+    "binder": "MODIFIED TEST BINDER",
+    "tags": [
+      "modified tag1",
+      "modified ta2",
+      "modified tag3"
+    ]
+  }
+}
