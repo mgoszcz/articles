@@ -17,9 +17,6 @@ class AutoSave(Thread):
         self._collection = collection
         self.stop = Event()
 
-    # def _verify_collection_content_changed(self, collection_snapshot):
-    #     for key, value in collection_snapshot
-
     def run(self):
         while not self.stop.is_set():
             if SAVE_NEEDED.is_set():

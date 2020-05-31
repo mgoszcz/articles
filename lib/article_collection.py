@@ -12,7 +12,8 @@ class ArticleCollection:
     def __init__(self):
         self._article_list = ArticleDict()
         self.load_data()
-        AutoSave(self._article_list).start()
+        self._auto_save = AutoSave(self._article_list)
+        self._auto_save.start()
 
     def add_new_article(self, title: str, description: str = '', page: str = '', binder: str = '',
                         tags: List[str] = None) -> str:
