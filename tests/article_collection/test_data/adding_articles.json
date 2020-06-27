@@ -1,0 +1,22 @@
+{
+  "add_articles": [
+    {
+      "title": "Artykul pierwszy",
+      "description": "",
+      "page": "",
+      "binder": "",
+      "tags": []
+    },
+    {
+      "title": "Artykul drugi",
+      "description": "Opis drugiego artykułu",
+      "page": "2",
+      "binder": "MORZE",
+      "tags": [
+        "tag4",
+        "tag5",
+        "tag6"
+      ]
+    }
+  ]
+}

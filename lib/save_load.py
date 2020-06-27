@@ -1,4 +1,3 @@
-
 import os
 import pickle
 import time
@@ -6,6 +5,8 @@ from threading import Thread, Event
 
 from lib.article_dict import ArticleDict
 from lib.events import SAVE_NEEDED, AUTO_SAVE_PAUSED
+
+MAIN_DIRECTORY = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
 class AutoSave(Thread):
@@ -28,7 +29,7 @@ class AutoSave(Thread):
 
 class SaveLoad:
 
-    def __init__(self, articles_list, file_path='database.dat'):
+    def __init__(self, articles_list, file_path=f'{MAIN_DIRECTORY}/database.dat'):
         self.file_path = file_path
         self.articles_list = articles_list
 

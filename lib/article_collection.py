@@ -15,6 +15,9 @@ class ArticleCollection:
         self._auto_save = AutoSave(self._article_list)
         self._auto_save.start()
 
+    def __del__(self):
+        self._auto_save.stop.set()
+
     def add_new_article(self, title: str, description: str = '', page: str = '', binder: str = '',
                         tags: List[str] = None) -> str:
         article = Article(title=title, description=description, page=page, binder=binder, tags=tags)
