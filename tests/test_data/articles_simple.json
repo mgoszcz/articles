@@ -43,6 +43,43 @@
       "tags": []
     }
   ],
+  "sorting_articles": [
+    {
+      "title": "Zac",
+      "description": "Opis pierwszego artykułu",
+      "page": "1",
+      "binder": "MORZE",
+      "tags": ["tag1", "tag2", "tag3"]
+    },
+    {
+      "title": "Abc",
+      "description": "Opis drugiego artykułu",
+      "page": "2",
+      "binder": "MORZE",
+      "tags": ["tag4", "tag5", "tag6"]
+    },
+    {
+      "title": "aac",
+      "description": "",
+      "page": "3",
+      "binder": "ŚRÓDLĄDZIE",
+      "tags": ["tag7", "tag8", "tag9"]
+    },
+    {
+      "title": "d1e",
+      "description": "Opis czwartego artykułu",
+      "page": "",
+      "binder": "MORZE",
+      "tags": ["tag3", "tag6", "tag9"]
+    },
+    {
+      "title": "d2e",
+      "description": "Opis pierwszego artykułu",
+      "page": "5",
+      "binder": "",
+      "tags": ["tag2", "tag4" ,"tag5"]
+    }
+  ],
   "sorting_test": ["Zac", "Abc", "aac", "d1e", "d2e"],
   "editing_test": {
     "title": "tytuł",

@@ -36,7 +36,7 @@ class AddArticleTest(unittest.TestCase):
         article_uuid = self.article_collection.add_new_article(title=self.first_article.title)
         article = self.article_collection.get_article(article_uuid)
         Verifiers().verify_article_with_title_only(article=article, reference_article=self.first_article)
-        WaitMethods().wait_for_save()
+        WaitMethods().wait_for_save_completed()
         new_collection = ArticleCollection()
         self.assertTrue(article_uuid in new_collection.articles_list.keys(),
                         'Verify new article uuid is present when creating new article collection (loaded from saved file)')
@@ -51,7 +51,7 @@ class AddArticleTest(unittest.TestCase):
                                                                tags=self.second_article.tags)
         article = self.article_collection.get_article(article_uuid)
         Verifiers().verify_article_with_all_fields(article=article, reference_article=self.second_article)
-        WaitMethods().wait_for_save()
+        WaitMethods().wait_for_save_completed()
         new_collection = ArticleCollection()
         self.assertTrue(article_uuid in new_collection.articles_list.keys(),
                         'Verify new article uuid is present when creating new article collection (loaded from saved file)')
@@ -66,7 +66,7 @@ class AddArticleTest(unittest.TestCase):
         self.article_collection.add_existing_article(article)
         Verifiers().verify_article_with_all_fields(article=self.article_collection.get_article(article.uuid),
                                                    reference_article=self.second_article)
-        WaitMethods().wait_for_save()
+        WaitMethods().wait_for_save_completed()
         new_collection = ArticleCollection()
         self.assertTrue(article.uuid in new_collection.articles_list.keys(),
                         'Verify new article uuid is present when creating new article collection (loaded from saved file)')

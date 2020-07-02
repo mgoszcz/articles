@@ -3,7 +3,7 @@ from typing import List
 
 from lib.article import Article
 from lib.article_dict import ArticleDict
-from lib.exceptions import DuplicatedArticle
+from lib.exceptions import DuplicatedArticle, InvalidUuidError
 from lib.save_load import SaveLoad, AutoSave
 
 
@@ -40,13 +40,19 @@ class ArticleCollection:
         return self._article_list.sort_by_title()
 
     def get_article(self, uuid: str) -> Article:
+        if uuid not in self._article_list.keys():
+            raise InvalidUuidError(f'UUID: "{uuid}" does not exist')
         return self._article_list[uuid]
 
     def remove_article(self, uuid: str):
+        if uuid not in self._article_list.keys():
+            raise InvalidUuidError(f'UUID: "{uuid}" does not exist')
         del self._article_list[uuid]
 
     def edit_article(self, uuid: str, title: str = '', description: str = '', page: str = '', binder: str = '',
                      tags: List[str] = None):
+        if uuid not in self._article_list.keys():
+            raise InvalidUuidError(f'UUID: "{uuid}" does not exist')
         article = self.get_article(uuid)
         if title:
             article.title = title
